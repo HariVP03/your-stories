@@ -1,17 +1,21 @@
 import React from "react";
-import { Spacer, Flex } from "@chakra-ui/react";
+import { chakra } from "@chakra-ui/react";
 
-import { Header, Main, Cards, Footer } from "@components";
+import { Navbar } from "@components";
+import Head from "next/head";
 
 const Home: React.FC = () => {
     return (
-        <Flex direction="column" minH="100vh">
-            <Header />
-            <Main />
-            <Cards />
-            <Spacer />
-            <Footer />
-        </Flex>
+        <>
+            <Head>
+                <title>
+                    Your Stories | Write your stories for the world to see
+                </title>
+            </Head>
+            <chakra.main>
+                <Navbar />
+            </chakra.main>
+        </>
     );
 };
 
