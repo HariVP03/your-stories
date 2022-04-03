@@ -1,9 +1,10 @@
 import { Avatar, Button, chakra, Flex } from "@chakra-ui/react";
 import React from "react";
+import styles from "./navButton.module.css";
 
 const NavButton: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
-        <Button bg="transparent" _hover={{}}>
+        <Button _hover={{}} className={styles.hover} bg="transparent">
             {children}
         </Button>
     );
@@ -38,10 +39,9 @@ const Navbar: React.FC = () => {
             >
                 <Avatar cursor="pointer" size="sm" />
             </Flex>
-            <Flex zIndex="1" h="50px" w="min" gap={12} justify="space-around">
+            <Flex zIndex="3" h="50px" w="min" gap={12} justify="space-around">
                 <NavButton>Read Stories</NavButton>
                 <NavButton>Write a Story</NavButton>
-                <NavButton>Login/Signup</NavButton>
             </Flex>
         </Flex>
     );
