@@ -20,6 +20,7 @@ const TextStory: React.FC = () => {
             transition="transform 100ms linear"
             border="1px solid"
             borderColor="gray.400"
+            h="fit-content"
             bg={useColorModeValue("white", "gray.800")}
             maxW="md"
         >
@@ -69,16 +70,9 @@ const TextStory: React.FC = () => {
             </Box>
 
             <Flex justifyContent="space-between" alignItems="center" mt={4}>
-                <Link
-                    color={useColorModeValue("brand.600", "brand.400")}
-                    _hover={{ textDecor: "underline" }}
-                >
-                    Read more
-                </Link>
-
                 <Flex alignItems="center">
                     <Image
-                        mx={4}
+                        mr={3}
                         w={10}
                         h={10}
                         rounded="full"
