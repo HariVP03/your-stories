@@ -21,7 +21,7 @@ const TextStory: React.FC = () => {
             border="1px solid"
             borderColor="gray.400"
             bg={useColorModeValue("white", "gray.800")}
-            maxW="2xl"
+            maxW="md"
         >
             <Flex justifyContent="space-between" alignItems="center">
                 <chakra.span
@@ -59,6 +59,7 @@ const TextStory: React.FC = () => {
                 <chakra.p
                     mt={2}
                     color={useColorModeValue("gray.600", "gray.300")}
+                    noOfLines={2}
                 >
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                     Tempora expedita dicta totam aspernatur doloremque.
