@@ -1,7 +1,7 @@
 import React from "react";
-import { chakra } from "@chakra-ui/react";
+import { chakra, Flex } from "@chakra-ui/react";
 
-import { Navbar } from "@components";
+import { TextStory, Navbar } from "@components";
 import Head from "next/head";
 
 const Home: React.FC = () => {
@@ -14,6 +14,9 @@ const Home: React.FC = () => {
             </Head>
             <chakra.main>
                 <Navbar />
+                <Flex p={5} w="full">
+                    <TextStory />
+                </Flex>
             </chakra.main>
         </>
     );
