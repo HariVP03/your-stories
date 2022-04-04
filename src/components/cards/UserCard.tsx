@@ -14,7 +14,7 @@ import { BsFillBriefcaseFill } from "react-icons/bs";
 const UserCard: React.FC = () => {
     return (
         <Box
-            w="sm"
+            w="xs"
             bg={useColorModeValue("white", "gray.800")}
             shadow="lg"
             rounded="none"
@@ -73,7 +73,7 @@ const UserCard: React.FC = () => {
                 >
                     <Icon as={BsFillBriefcaseFill} h={6} w={6} mr={2} />
 
-                    <chakra.h1 px={2} fontSize="sm">
+                    <chakra.h1 my="auto" px={2} fontSize="sm">
                         Choc UI
                     </chakra.h1>
                 </Flex>
@@ -85,7 +85,7 @@ const UserCard: React.FC = () => {
                 >
                     <Icon as={MdLocationOn} h={6} w={6} mr={2} />
 
-                    <chakra.h1 px={2} fontSize="sm">
+                    <chakra.h1 my="auto" px={2} fontSize="sm">
                         California
                     </chakra.h1>
                 </Flex>
