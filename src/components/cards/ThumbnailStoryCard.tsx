@@ -6,6 +6,7 @@ import {
     Flex,
     useColorModeValue,
     Link,
+    Tooltip,
 } from "@chakra-ui/react";
 
 const ThumbnailStory: React.FC = () => {
@@ -53,6 +54,7 @@ const ThumbnailStory: React.FC = () => {
                     >
                         I Built A Successful Blog In One Year
                     </Link>
+
                     <chakra.p
                         mt={2}
                         fontSize="sm"
