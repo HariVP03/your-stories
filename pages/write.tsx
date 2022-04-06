@@ -1,4 +1,4 @@
-import { chakra } from "@chakra-ui/react";
+import { chakra, Flex } from "@chakra-ui/react";
 import { Navbar } from "@components";
 import { NextPage } from "next";
 import Head from "next/head";
@@ -11,6 +11,9 @@ const Write: NextPage = () => {
             </Head>
             <chakra.main>
                 <Navbar />
+                <Flex w="full" h="100vh">
+                    123
+                </Flex>
             </chakra.main>
         </>
     );

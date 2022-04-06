@@ -44,6 +44,7 @@ const Navbar: React.FC<{ user?: any }> = ({ user }) => {
             h="100px"
             borderBottom="1px solid black"
             align="center"
+            zIndex="1"
         >
             <chakra.h1
                 fontSize="3xl"
