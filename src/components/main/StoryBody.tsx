@@ -1,5 +1,16 @@
-import { Avatar, chakra, Flex, Input, Text } from "@chakra-ui/react";
+import {
+    Avatar,
+    chakra,
+    Checkbox,
+    Flex,
+    Input,
+    Radio,
+    Text,
+    Textarea,
+} from "@chakra-ui/react";
+import Markdown from "markdown-to-jsx";
 import { useState } from "react";
+import styles from "./markdown.module.css";
 
 const StoryBody: React.FC<{
     editMode?: boolean;
@@ -18,7 +29,8 @@ const StoryBody: React.FC<{
 }) => {
     const [editTitle, setEditTitle] = useState("Title of the Story");
     const [editTopic, setEditTopic] = useState("Your Topic");
-    const [editBody, setEditBody] = useState("Your Story goes gere.. :)");
+    const [editBody, setEditBody] = useState("Your story goes here.. :)");
+    const [preview, setPreview] = useState<boolean>(false);
     return (
         <Flex w="full" px={12} pt={5} direction="column">
             {/* <Text>{topic}</Text> */}
@@ -57,9 +69,7 @@ const StoryBody: React.FC<{
                     <chakra.h1 fontSize="4xl">{title}</chakra.h1>
                 </>
             )}
-
             {/* <chakra.h1 fontSize="4xl">{title}</chakra.h1> */}
-
             <Flex align="center" gap={2}>
                 <Avatar h="40px" w="40px" />
                 <Flex direction="column">
@@ -71,21 +81,45 @@ const StoryBody: React.FC<{
                     </Text>
                 </Flex>
             </Flex>
-            <Flex mt={12}>
+            {editMode ? (
+                <Flex gap={2} mb={0} mt={12}>
+                    <Checkbox
+                        // value={preview}
+                        defaultChecked={false}
+                        onChange={(e) => setPreview(e.target.checked)}
+                    />{" "}
+                    Preview Mode
+                </Flex>
+            ) : (
+                ""
+            )}
+            <Flex mt={editMode ? 4 : 12}>
                 {editMode ? (
-                    <Input
-                        mb={5}
-                        _active={{}}
-                        _focus={{}}
-                        // fontWeight="500"
-                        value={editBody}
-                        onChange={(e) => setEditBody(e.target.value)}
-                        _placeholder={{ color: "black" }}
-                        placeholder={body}
-                        // fontSize="4xl"
-                        px={0}
-                        border="0px"
-                    />
+                    !preview ? (
+                        <Textarea
+                            mb={5}
+                            _active={{}}
+                            _focus={{}}
+                            value={editBody}
+                            onChange={(e) => setEditBody(e.target.value)}
+                            _placeholder={{ color: "black" }}
+                            placeholder={body}
+                            resize="vertical"
+                            h="2xl"
+                            border="1px solid"
+                            borderColor="gray.400"
+                        />
+                    ) : (
+                        <Text
+                            className={styles.markdown}
+                            mb={5}
+                            py={0}
+                            px={0}
+                            as={Markdown}
+                        >
+                            {editBody}
+                        </Text>
+                    )
                 ) : (
                     body
                 )}
