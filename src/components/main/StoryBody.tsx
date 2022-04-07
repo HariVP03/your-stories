@@ -9,6 +9,7 @@ import {
     Textarea,
 } from "@chakra-ui/react";
 import Markdown from "markdown-to-jsx";
+import moment from "moment";
 import { useState } from "react";
 import { auth } from "src/firebase";
 import styles from "./markdown.module.css";
@@ -28,7 +29,7 @@ const StoryBody: React.FC<{
     const [editTopic, setEditTopic] = useState("Your Topic");
     const [editBody, setEditBody] = useState("Your story goes here.. :)");
     const [preview, setPreview] = useState<boolean>(false);
-    const dateTemp = Date.today().toString("MMMM dS, yyyy");
+    const date = moment().format("MMM, DD, YYYY");
     const user = auth.currentUser;
 
     return (
