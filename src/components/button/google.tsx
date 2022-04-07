@@ -6,15 +6,12 @@ import { useRouter } from "next/router";
 
 export default function GoogleButton() {
     const router = useRouter();
-    const res = getRedirectResult(auth).then((res) => {
+    getRedirectResult(auth).then((res) => {
         if (res) {
             console.log(res);
             router.push("/");
         }
     });
-    // if (res) {
-    //     router.push("/");
-    // }
     return (
         <Button
             w={"fit-content"}
