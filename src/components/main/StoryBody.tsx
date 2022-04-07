@@ -34,7 +34,6 @@ const StoryBody: React.FC<{
 
     return (
         <Flex w="full" px={12} pt={5} direction="column">
-            {/* <Text>{topic}</Text> */}
             {editMode ? (
                 <>
                     <Input
@@ -70,7 +69,6 @@ const StoryBody: React.FC<{
                     <chakra.h1 fontSize="4xl">{title}</chakra.h1>
                 </>
             )}
-            {/* <chakra.h1 fontSize="4xl">{title}</chakra.h1> */}
             <Flex align="center" gap={2}>
                 <Avatar src={user?.photoURL || ""} h="40px" w="40px" />
 
@@ -86,7 +84,6 @@ const StoryBody: React.FC<{
             {editMode ? (
                 <Flex gap={2} mb={0} mt={12}>
                     <Checkbox
-                        // value={preview}
                         defaultChecked={false}
                         onChange={(e) => setPreview(e.target.checked)}
                     />{" "}

@@ -13,7 +13,6 @@ import { getAuth, onAuthStateChanged, signOut, User } from "firebase/auth";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { auth } from "src/firebase";
-// import { auth } from "src/firebase";
 import styles from "./navButton.module.css";
 
 const NavButton: React.FC<{
@@ -71,15 +70,12 @@ const Navbar: React.FC = () => {
                 justify="end"
                 mr={5}
             >
-                {/* <Avatar cursor="pointer" size="sm" /> */}
-
                 <Menu>
                     <MenuButton
                         cursor="pointer"
                         size="sm"
                         as={Avatar}
                         src={user?.photoURL || ""}
-                        // rightIcon={<ChevronDownIcon />}
                     />
                     <MenuList
                         border="1px solid"
