@@ -10,27 +10,27 @@ import {
 } from "@chakra-ui/react";
 import Markdown from "markdown-to-jsx";
 import { useState } from "react";
+import { auth } from "src/firebase";
 import styles from "./markdown.module.css";
 
 const StoryBody: React.FC<{
     editMode?: boolean;
     title?: string;
     topic?: string;
-    authorName?: string;
-    date?: string;
     body?: string;
 }> = ({
     editMode = false,
     title = "Title of the Story",
     topic = "Your Topic",
-    authorName = "Your Name",
-    date = "April 6, 2022",
     body = "Your story goes here.. :)",
 }) => {
     const [editTitle, setEditTitle] = useState("Title of the Story");
     const [editTopic, setEditTopic] = useState("Your Topic");
     const [editBody, setEditBody] = useState("Your story goes here.. :)");
     const [preview, setPreview] = useState<boolean>(false);
+    const dateTemp = Date.today().toString("MMMM dS, yyyy");
+    const user = auth.currentUser;
+
     return (
         <Flex w="full" px={12} pt={5} direction="column">
             {/* <Text>{topic}</Text> */}
@@ -71,10 +71,11 @@ const StoryBody: React.FC<{
             )}
             {/* <chakra.h1 fontSize="4xl">{title}</chakra.h1> */}
             <Flex align="center" gap={2}>
-                <Avatar h="40px" w="40px" />
+                <Avatar src={user?.photoURL || ""} h="40px" w="40px" />
+
                 <Flex direction="column">
                     <Text my="auto" fontSize="lg">
-                        {authorName}
+                        {user?.displayName || "Author Name"}
                     </Text>
                     <Text my="auto" fontSize="sm">
                         {date}

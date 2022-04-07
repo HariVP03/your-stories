@@ -9,8 +9,11 @@ import {
     MenuItem,
     MenuList,
 } from "@chakra-ui/react";
+import { getAuth, onAuthStateChanged, signOut, User } from "firebase/auth";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
+import { auth } from "src/firebase";
+// import { auth } from "src/firebase";
 import styles from "./navButton.module.css";
 
 const NavButton: React.FC<{
@@ -35,7 +38,12 @@ const NavButton: React.FC<{
     );
 };
 
-const Navbar: React.FC<{ user?: any }> = ({ user }) => {
+const Navbar: React.FC = () => {
+    const [user, setUser] = useState<User | null>();
+    const router = useRouter();
+    onAuthStateChanged(auth, (res) => {
+        setUser(res);
+    });
     return (
         <Flex
             direction="column"
@@ -70,7 +78,7 @@ const Navbar: React.FC<{ user?: any }> = ({ user }) => {
                         cursor="pointer"
                         size="sm"
                         as={Avatar}
-                        src={user?.photoUrl || ""}
+                        src={user?.photoURL || ""}
                         // rightIcon={<ChevronDownIcon />}
                     />
                     <MenuList
@@ -80,14 +88,26 @@ const Navbar: React.FC<{ user?: any }> = ({ user }) => {
                     >
                         {!user ? (
                             <>
-                                <MenuItem>Login</MenuItem>
-                                <MenuItem>Signup</MenuItem>
+                                <MenuItem onClick={() => router.push("/login")}>
+                                    Login
+                                </MenuItem>
+                                <MenuItem
+                                    onClick={() => router.push("/signup")}
+                                >
+                                    Signup
+                                </MenuItem>
                             </>
                         ) : (
                             <>
                                 <MenuItem>Profile</MenuItem>
                                 <MenuItem>Write a Story</MenuItem>
-                                <MenuItem>Log out</MenuItem>
+                                <MenuItem
+                                    onClick={() => {
+                                        auth.signOut();
+                                    }}
+                                >
+                                    Log out
+                                </MenuItem>
                             </>
                         )}
                     </MenuList>
