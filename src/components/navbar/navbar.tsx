@@ -1,3 +1,4 @@
+import { useQuery } from "@apollo/client";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
     Avatar,
@@ -9,6 +10,7 @@ import {
     MenuItem,
     MenuList,
 } from "@chakra-ui/react";
+import { GET_USER_BY_ID } from "@queries";
 import { getAuth, onAuthStateChanged, signOut, User } from "firebase/auth";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -42,6 +44,14 @@ const Navbar: React.FC = () => {
     const router = useRouter();
     onAuthStateChanged(auth, (res) => {
         setUser(res);
+    });
+    const { loading } = useQuery(GET_USER_BY_ID, {
+        onCompleted: (data) => {
+            console.log(data);
+        },
+        variables: {
+            getUserId: "624c281f3a0f553921f5a5cc",
+        },
     });
     return (
         <Flex
