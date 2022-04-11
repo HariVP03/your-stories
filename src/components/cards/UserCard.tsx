@@ -11,7 +11,14 @@ import {
 import { MdHeadset, MdEmail, MdLocationOn } from "react-icons/md";
 import { BsFillBriefcaseFill } from "react-icons/bs";
 
-const UserCard: React.FC = () => {
+const UserCard: React.FC<{
+    name: string;
+    avatar: string;
+    status: string;
+    aboutMe: string;
+    workAt: string;
+    basedIn: string;
+}> = ({ name, avatar, status, aboutMe, workAt, basedIn }) => {
     return (
         <Box
             w="xs"
@@ -30,7 +37,10 @@ const UserCard: React.FC = () => {
                 h={56}
                 fit="cover"
                 objectPosition="center"
-                src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                src={
+                    avatar ||
+                    "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                }
                 alt="avatar"
             />
 
@@ -44,7 +54,7 @@ const UserCard: React.FC = () => {
                     fontSize="lg"
                     my="auto"
                 >
-                    Focusing
+                    {status}
                 </chakra.h1>
             </Flex>
 
@@ -54,7 +64,7 @@ const UserCard: React.FC = () => {
                     fontWeight="bold"
                     color={useColorModeValue("gray.800", "white")}
                 >
-                    Patterson johnson
+                    {name}
                 </chakra.h1>
 
                 <chakra.p
@@ -62,8 +72,7 @@ const UserCard: React.FC = () => {
                     color={useColorModeValue("gray.700", "gray.400")}
                     noOfLines={2}
                 >
-                    Full Stack maker & UI / UX Designer , love hip hop music
-                    Author of Building UI.
+                    {aboutMe}
                 </chakra.p>
 
                 <Flex
@@ -74,7 +83,7 @@ const UserCard: React.FC = () => {
                     <Icon as={BsFillBriefcaseFill} h={6} w={6} mr={2} />
 
                     <chakra.h1 my="auto" px={2} fontSize="sm">
-                        Choc UI
+                        {workAt}
                     </chakra.h1>
                 </Flex>
 
@@ -86,7 +95,7 @@ const UserCard: React.FC = () => {
                     <Icon as={MdLocationOn} h={6} w={6} mr={2} />
 
                     <chakra.h1 my="auto" px={2} fontSize="sm">
-                        California
+                        {basedIn}
                     </chakra.h1>
                 </Flex>
             </Box>

@@ -8,13 +8,34 @@ import {
     Link,
     Tooltip,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
-const ThumbnailStory: React.FC = () => {
+const ThumbnailStory: React.FC<{
+    topic: string;
+    title: string;
+    body: string;
+    authorAvatar: string;
+    authorName: string;
+    date: string;
+    thumbnail: string;
+    id: string;
+}> = ({
+    authorAvatar,
+    authorName,
+    body,
+    date,
+    thumbnail,
+    title,
+    topic,
+    id,
+}) => {
+    const router = useRouter();
     return (
         <Box
             rounded="none"
             border="1px solid"
             borderColor="gray.400"
+            onClick={() => router.push(`/story/${id}`)}
             shadow="md"
             cursor="pointer"
             _hover={{ transform: "translateY(-5px)" }}
@@ -28,7 +49,10 @@ const ThumbnailStory: React.FC = () => {
                 w="full"
                 h={32}
                 fit="cover"
-                src="https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                src={
+                    thumbnail ||
+                    "https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                }
                 alt="Article"
             />
 
@@ -39,7 +63,7 @@ const ThumbnailStory: React.FC = () => {
                         textTransform="uppercase"
                         color={useColorModeValue("brand.600", "brand.400")}
                     >
-                        Product
+                        {topic}
                     </chakra.span>
                     <Link
                         display="block"
@@ -52,7 +76,7 @@ const ThumbnailStory: React.FC = () => {
                             textDecor: "underline",
                         }}
                     >
-                        I Built A Successful Blog In One Year
+                        {title}
                     </Link>
 
                     <chakra.p
@@ -61,10 +85,7 @@ const ThumbnailStory: React.FC = () => {
                         color={useColorModeValue("gray.600", "gray.400")}
                         noOfLines={2}
                     >
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Molestie parturient et sem ipsum volutpat vel. Natoque
-                        sem et aliquam mauris egestas quam volutpat viverra. In
-                        pretium nec senectus erat. Et malesuada lobortis.
+                        {body}
                     </chakra.p>
                 </Box>
 
@@ -75,7 +96,10 @@ const ThumbnailStory: React.FC = () => {
                                 h={10}
                                 fit="cover"
                                 rounded="full"
-                                src="https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=48&q=60"
+                                src={
+                                    authorAvatar ||
+                                    "https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=48&q=60"
+                                }
                                 alt="Avatar"
                             />
                             <Link
@@ -86,7 +110,7 @@ const ThumbnailStory: React.FC = () => {
                                     "gray.200",
                                 )}
                             >
-                                Jone Doe
+                                {authorName}
                             </Link>
                         </Flex>
                         <chakra.span
@@ -94,7 +118,7 @@ const ThumbnailStory: React.FC = () => {
                             fontSize="sm"
                             color={useColorModeValue("gray.600", "gray.300")}
                         >
-                            21 SEP 2015
+                            {date}
                         </chakra.span>
                     </Flex>
                 </Box>

@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { chakra, Flex } from "@chakra-ui/react";
 
 import { TextStory, Navbar, ThumbnailStory, UserCard } from "@components";
 import Head from "next/head";
+import { useLazyQuery, useQuery } from "@apollo/client";
+import { GET_RANDOM_USERS } from "@queries";
 
 const Home: React.FC = () => {
+    // let randomUsers: any;
+    const [randomUsers, setRandomUsers] = useState<any>();
+    const [getRandomUsers, { called, loading }] =
+        useLazyQuery(GET_RANDOM_USERS);
+    useEffect(() => {
+        getRandomUsers().then((e: any) => {
+            setRandomUsers(e.data.getRandomUsers);
+        });
+    }, []);
+
     return (
         <>
             <Head>
@@ -22,9 +34,34 @@ const Home: React.FC = () => {
                     w="full"
                     h="fit-content"
                 >
-                    <TextStory />
-                    <ThumbnailStory />
-                    <TextStory />
+                    <TextStory
+                        id="321"
+                        authorAvatar=""
+                        authorName="Hari Vishnu Parashar"
+                        body="Haha ok text go brrrr"
+                        date="April 11, 2022"
+                        title="Haha ok Title"
+                        topic="Blockchain"
+                    />
+                    <ThumbnailStory
+                        id="123"
+                        authorAvatar=""
+                        authorName="Lambu Singh"
+                        body="Haha ok text go brr"
+                        date="April 01, 2022"
+                        thumbnail=""
+                        title="I Met JFK"
+                        topic="Web3"
+                    />
+                    <TextStory
+                        authorAvatar=""
+                        id="543"
+                        authorName="Chotu Singh"
+                        body="Yes no Text"
+                        date="April 07, 2022"
+                        title="Title Accessibility"
+                        topic="Technology"
+                    />
                 </Flex>
                 <Flex
                     flexWrap="wrap"
@@ -34,9 +71,34 @@ const Home: React.FC = () => {
                     w="full"
                     h="fit-content"
                 >
-                    <TextStory />
-                    <ThumbnailStory />
-                    <TextStory />
+                    <TextStory
+                        id="321"
+                        authorAvatar=""
+                        authorName="Hari Vishnu Parashar"
+                        body="Haha ok text go brrrr"
+                        date="April 11, 2022"
+                        title="Haha ok Title"
+                        topic="Blockchain"
+                    />
+                    <ThumbnailStory
+                        id="123"
+                        authorAvatar=""
+                        authorName="Lambu Singh"
+                        body="Haha ok text go brr"
+                        date="April 01, 2022"
+                        thumbnail=""
+                        title="I Met JFK"
+                        topic="Web3"
+                    />
+                    <TextStory
+                        authorAvatar=""
+                        id="543"
+                        authorName="Chotu Singh"
+                        body="Yes no Text"
+                        date="April 07, 2022"
+                        title="Title Accessibility"
+                        topic="Technology"
+                    />
                 </Flex>
                 <chakra.h1 w="full" textAlign="center" fontSize="3xl">
                     Meet Some of Our Authors
@@ -49,9 +111,9 @@ const Home: React.FC = () => {
                     w="full"
                     h="fit-content"
                 >
-                    <UserCard />
-                    <UserCard />
-                    <UserCard />
+                    {!loading && called
+                        ? randomUsers?.map((e: any) => <UserCard {...e} />)
+                        : ""}
                 </Flex>
             </chakra.main>
         </>

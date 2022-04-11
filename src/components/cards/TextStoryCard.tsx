@@ -7,14 +7,25 @@ import {
     useColorModeValue,
     Link,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
-const TextStory: React.FC = () => {
+const TextStory: React.FC<{
+    title: string;
+    body: string;
+    authorName: string;
+    authorAvatar: string;
+    date: string;
+    topic: string;
+    id: string;
+}> = ({ title, body, authorAvatar, authorName, date, topic, id }) => {
+    const router = useRouter();
     return (
         <Box
             px={8}
             py={4}
             rounded="none"
             shadow="lg"
+            onClick={() => router.push(`/story/${id}`)}
             cursor="pointer"
             _hover={{ transform: "translateY(-5px)" }}
             transition="transform 100ms linear"
@@ -29,7 +40,7 @@ const TextStory: React.FC = () => {
                     fontSize="sm"
                     color={useColorModeValue("gray.600", "gray.400")}
                 >
-                    Mar 10, 2019
+                    {date}
                 </chakra.span>
                 <Link
                     px={3}
@@ -41,7 +52,7 @@ const TextStory: React.FC = () => {
                     rounded="md"
                     _hover={{ bg: "gray.500" }}
                 >
-                    Design
+                    {topic}
                 </Link>
             </Flex>
 
@@ -55,17 +66,14 @@ const TextStory: React.FC = () => {
                         textDecor: "underline",
                     }}
                 >
-                    Accessibility tools for designers and developers
+                    {title}
                 </Link>
                 <chakra.p
                     mt={2}
                     color={useColorModeValue("gray.600", "gray.300")}
                     noOfLines={2}
                 >
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Tempora expedita dicta totam aspernatur doloremque.
-                    Excepturi iste iusto eos enim reprehenderit nisi, accusamus
-                    delectus nihil quis facere in modi ratione libero!
+                    {body}
                 </chakra.p>
             </Box>
 
@@ -78,7 +86,10 @@ const TextStory: React.FC = () => {
                         rounded="full"
                         fit="cover"
                         display={{ base: "none", sm: "block" }}
-                        src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=40&q=80"
+                        src={
+                            authorAvatar ||
+                            "https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=40&q=80"
+                        }
                         alt="avatar"
                     />
                     <Link
@@ -86,7 +97,7 @@ const TextStory: React.FC = () => {
                         fontWeight="700"
                         cursor="pointer"
                     >
-                        Khatab wedaa
+                        {authorName}
                     </Link>
                 </Flex>
             </Flex>

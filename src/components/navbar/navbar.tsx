@@ -13,7 +13,7 @@ import {
 import { GET_USER_BY_ID } from "@queries";
 import { getAuth, onAuthStateChanged, signOut, User } from "firebase/auth";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { auth } from "src/firebase";
 import styles from "./navButton.module.css";
 
@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
     onAuthStateChanged(auth, (res) => {
         setUser(res);
     });
-    const { loading } = useQuery(GET_USER_BY_ID, {
+    useQuery(GET_USER_BY_ID, {
         onCompleted: (data) => {
             console.log(data);
         },

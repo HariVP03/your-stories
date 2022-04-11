@@ -9,3 +9,17 @@ export const GET_USER_BY_ID = gql`
         }
     }
 `;
+
+export const GET_RANDOM_USERS = gql`
+    query Query {
+        getRandomUsers {
+            id
+            name
+            avatar
+            aboutMe
+            status
+            workAt
+            basedIn
+        }
+    }
+`;
