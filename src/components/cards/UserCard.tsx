@@ -44,8 +44,14 @@ const UserCard: React.FC<{
                 alt="avatar"
             />
 
-            <Flex alignItems="center" px={6} py={3} bg="gray.900">
-                <Icon as={MdHeadset} h={6} w={6} color="white" />
+            <Flex
+                alignItems="center"
+                justify="center"
+                px={6}
+                py={3}
+                bg="gray.900"
+            >
+                {/* <Icon as={MdHeadset} h={6} w={6} color="white" /> */}
 
                 <chakra.h1
                     mx={3}
@@ -53,6 +59,8 @@ const UserCard: React.FC<{
                     fontWeight="bold"
                     fontSize="lg"
                     my="auto"
+                    textAlign="center"
+                    w="full"
                 >
                     {status}
                 </chakra.h1>

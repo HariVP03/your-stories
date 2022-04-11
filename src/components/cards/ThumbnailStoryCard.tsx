@@ -37,6 +37,7 @@ const ThumbnailStory: React.FC<{
             borderColor="gray.400"
             onClick={() => router.push(`/story/${id}`)}
             shadow="md"
+            minW="250px"
             cursor="pointer"
             _hover={{ transform: "translateY(-5px)" }}
             transition="transform 100ms linear"
