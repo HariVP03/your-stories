@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { chakra, Flex, Spinner } from "@chakra-ui/react";
 
-import { TextStory, Navbar, ThumbnailStory, UserCard } from "@components";
+import { Navbar, ThumbnailStory, UserCard } from "@components";
 import Head from "next/head";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { GET_RANDOM_USERS, GET_STORIES } from "@queries";
 
 const Home: React.FC = () => {
     // let randomUsers: any;
+
     const [randomUsers, setRandomUsers] = useState<any>();
     const [stories, setStories] = useState<any>();
     const [offset, setOffset] = useState(0);

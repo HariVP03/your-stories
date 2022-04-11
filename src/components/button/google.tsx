@@ -3,12 +3,28 @@ import { Button } from "@chakra-ui/react";
 import { getRedirectResult, signInWithRedirect } from "firebase/auth";
 import { auth, googleProvider } from "src/firebase";
 import { useRouter } from "next/router";
+import { useMutation } from "@apollo/client";
+import { CREATE_USER } from "src/graphQL/mutations/user";
 
 export default function GoogleButton() {
     const router = useRouter();
+    const [createUser] = useMutation(CREATE_USER);
     getRedirectResult(auth).then((res) => {
         if (res) {
-            console.log(res);
+            // console.log(res);
+            // window.location;
+            const user = res.user;
+            createUser({
+                variables: {
+                    name: user.displayName,
+                    email: user.email,
+                    avatar: user.photoURL,
+                    aboutMe: "Ayo I'm new here!",
+                    workAt: "Not here",
+                    basedIn: "Somewhere",
+                    status: "Ayo I'm new here!",
+                },
+            });
             router.push("/");
         }
     });
