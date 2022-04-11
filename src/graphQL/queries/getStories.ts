@@ -16,3 +16,19 @@ export const GET_STORIES = gql`
         }
     }
 `;
+
+export const GET_STORY_BY_ID = gql`
+    query GetStory($getStoryId: String) {
+        getStory(id: $getStoryId) {
+            title
+            date
+            body
+            author {
+                name
+                avatar
+            }
+            topic
+            thumbnail
+        }
+    }
+`;

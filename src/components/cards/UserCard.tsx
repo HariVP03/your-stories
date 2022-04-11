@@ -51,8 +51,6 @@ const UserCard: React.FC<{
                 py={3}
                 bg="gray.900"
             >
-                {/* <Icon as={MdHeadset} h={6} w={6} color="white" /> */}
-
                 <chakra.h1
                     mx={3}
                     color="white"

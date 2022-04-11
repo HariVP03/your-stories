@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { chakra, Flex } from "@chakra-ui/react";
+import { chakra, Flex, Spinner } from "@chakra-ui/react";
 
 import { TextStory, Navbar, ThumbnailStory, UserCard } from "@components";
 import Head from "next/head";
@@ -12,30 +12,20 @@ const Home: React.FC = () => {
     const [stories, setStories] = useState<any>();
     const [offset, setOffset] = useState(0);
 
-    const [getRandomUsers, { called, loading }] =
-        useLazyQuery(GET_RANDOM_USERS);
-    const [getStories, { called: calledStories, loading: loadingStories }] =
-        useLazyQuery(GET_STORIES, {
-            variables: {
-                limit: 9,
-                offset,
-            },
-        });
-
-    useEffect(() => {
-        getRandomUsers().then((e: any) => {
-            setRandomUsers(e.data.getRandomUsers);
-        });
-        getStories().then((e: any) => {
-            setStories(e.data.getStories);
-        });
-    }, []);
-
-    useEffect(() => {
-        getStories().then((e: any) => {
-            setStories(e.data.getStories);
-        });
-    }, [offset]);
+    const { loading } = useQuery(GET_RANDOM_USERS, {
+        onCompleted: (e) => {
+            setRandomUsers(e.getRandomUsers);
+        },
+    });
+    const { loading: loadingStories } = useQuery(GET_STORIES, {
+        variables: {
+            limit: 9,
+            offset,
+        },
+        onCompleted: (e) => {
+            setStories(e.getStories);
+        },
+    });
 
     return (
         <>
@@ -54,12 +44,20 @@ const Home: React.FC = () => {
                     w="full"
                     h="fit-content"
                 >
-                    {!loadingStories && calledStories
-                        ? stories?.map((e: any) => <ThumbnailStory {...e} />)
-                        : ""}
+                    {!loadingStories ? (
+                        stories?.map((e: any) => (
+                            <ThumbnailStory {...e} key={e.id} />
+                        ))
+                    ) : (
+                        <Flex w="full" justify="center" h="fit-content">
+                            <Spinner />
+                        </Flex>
+                    )}
                 </Flex>
                 <chakra.h1 w="full" textAlign="center" fontSize="3xl">
-                    Meet Some of Our Authors
+                    {!loading && !loadingStories
+                        ? "Meet Some of Our Authors"
+                        : ""}
                 </chakra.h1>
                 <Flex
                     flexWrap="wrap"
@@ -69,7 +67,7 @@ const Home: React.FC = () => {
                     w="full"
                     h="fit-content"
                 >
-                    {!loading && called
+                    {!loading
                         ? randomUsers?.map((e: any) => <UserCard {...e} />)
                         : ""}
                 </Flex>

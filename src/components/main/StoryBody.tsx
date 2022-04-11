@@ -19,18 +19,14 @@ const StoryBody: React.FC<{
     title?: string;
     topic?: string;
     body?: string;
-}> = ({
-    editMode = false,
-    title = "Title of the Story",
-    topic = "Your Topic",
-    body = "Your story goes here.. :)",
-}) => {
+    authorName: string;
+    authorAvatar: string;
+}> = ({ editMode = false, title, topic, body, authorName, authorAvatar }) => {
     const [editTitle, setEditTitle] = useState("Title of the Story");
     const [editTopic, setEditTopic] = useState("Your Topic");
     const [editBody, setEditBody] = useState("Your story goes here.. :)");
     const [preview, setPreview] = useState<boolean>(false);
     const date = moment().format("MMM, DD, YYYY");
-    const user = auth.currentUser;
 
     return (
         <Flex w="full" px={12} pt={5} direction="column">
@@ -70,11 +66,11 @@ const StoryBody: React.FC<{
                 </>
             )}
             <Flex align="center" gap={2}>
-                <Avatar src={user?.photoURL || ""} h="40px" w="40px" />
+                <Avatar src={authorAvatar} h="40px" w="40px" />
 
                 <Flex direction="column">
                     <Text my="auto" fontSize="lg">
-                        {user?.displayName || "Author Name"}
+                        {authorName}
                     </Text>
                     <Text my="auto" fontSize="sm">
                         {date}
