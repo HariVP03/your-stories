@@ -8,22 +8,28 @@ import { ApolloProvider } from "@apollo/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { RecoilRoot } from "recoil";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     const apolloClient = initializeApollo();
     const queryClient = new QueryClient();
     return (
-        <ChakraProvider theme={theme}>
-            <ApolloProvider client={apolloClient}>
-                <QueryClientProvider client={queryClient}>
-                    <Hydrate state={pageProps.dehydratedState}>
-                        <RecoilRoot>
-                            <Component {...pageProps} />
-                        </RecoilRoot>
-                    </Hydrate>
-                </QueryClientProvider>
-            </ApolloProvider>
-        </ChakraProvider>
+        <>
+            <Head>
+                <link rel="shortcut icon" href="/favicon.ico" />
+            </Head>
+            <ChakraProvider theme={theme}>
+                <ApolloProvider client={apolloClient}>
+                    <QueryClientProvider client={queryClient}>
+                        <Hydrate state={pageProps.dehydratedState}>
+                            <RecoilRoot>
+                                <Component {...pageProps} />
+                            </RecoilRoot>
+                        </Hydrate>
+                    </QueryClientProvider>
+                </ApolloProvider>
+            </ChakraProvider>
+        </>
     );
 }
 
