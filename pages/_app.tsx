@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                     property="og:description"
                     content="Write and share your stories and thoughts with the world with ease and read what other people have to share."
                 />
-                <meta property="og:image" content="/images/yourstories.png" />
+                <meta property="og:image" content="/images/yourstories.svg" />
 
                 {/* <!-- Twitter --> */}
                 <meta property="twitter:card" content="summary_large_image" />
@@ -58,7 +58,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                 />
                 <meta
                     property="twitter:image"
-                    content="/images/yourstories.png"
+                    content="/images/yourstories.svg"
                 />
             </Head>
             <ChakraProvider theme={theme}>
