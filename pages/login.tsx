@@ -12,7 +12,7 @@ import {
     Text,
     useColorModeValue,
 } from "@chakra-ui/react";
-import { GoogleButton } from "@components";
+import GoogleButton from "@components/button/google";
 import Head from "next/head";
 
 const Login: React.FC = () => {

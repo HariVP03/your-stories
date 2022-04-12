@@ -1,7 +1,12 @@
 import { FcGoogle } from "react-icons/fc";
 import { Button } from "@chakra-ui/react";
-import { getRedirectResult, signInWithRedirect } from "firebase/auth";
-import { auth, googleProvider } from "src/firebase";
+import {
+    getAuth,
+    getRedirectResult,
+    onAuthStateChanged,
+    signInWithRedirect,
+} from "firebase/auth";
+import { googleProvider } from "src/firebase";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import { CREATE_USER } from "src/graphQL/mutations/user";
@@ -9,20 +14,24 @@ import { CREATE_USER } from "src/graphQL/mutations/user";
 export default function GoogleButton() {
     const router = useRouter();
     const [createUser] = useMutation(CREATE_USER);
-    getRedirectResult(auth).then((res) => {
-        if (res) {
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
             // console.log(res);
             // window.location;
-            const user = res.user;
+
             createUser({
                 variables: {
-                    name: user.displayName,
-                    email: user.email,
-                    avatar: user.photoURL,
-                    aboutMe: "Ayo I'm new here!",
-                    workAt: "Not here",
-                    basedIn: "Somewhere",
-                    status: "Ayo I'm new here!",
+                    data: {
+                        name: user.displayName,
+                        email: user.email,
+                        avatar: user.photoURL,
+                        aboutMe: "Ayo I'm new here!",
+                        workAt: "Not here",
+                        basedIn: "Somewhere",
+                        status: "Ayo I'm new here!",
+                    },
                 },
             });
             router.push("/");
@@ -34,7 +43,9 @@ export default function GoogleButton() {
             border="1px solid"
             borderColor="gray.300"
             onClick={() => {
-                signInWithRedirect(auth, googleProvider);
+                signInWithRedirect(auth, googleProvider).then((e) => {
+                    console.log(e);
+                });
             }}
             rounded="none"
             justifyContent="center"
