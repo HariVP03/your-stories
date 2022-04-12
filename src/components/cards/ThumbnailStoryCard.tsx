@@ -14,21 +14,11 @@ const ThumbnailStory: React.FC<{
     topic: string;
     title: string;
     body: string;
-    authorAvatar: string;
-    authorName: string;
+    author: any;
     date: string;
     thumbnail: string;
     id: string;
-}> = ({
-    authorAvatar,
-    authorName,
-    body,
-    date,
-    thumbnail,
-    title,
-    topic,
-    id,
-}) => {
+}> = ({ author, body, date, thumbnail, title, topic, id }) => {
     const router = useRouter();
     return (
         <Box
@@ -42,7 +32,7 @@ const ThumbnailStory: React.FC<{
             _hover={{ transform: "translateY(-5px)" }}
             transition="transform 100ms linear"
             bg={useColorModeValue("white", "gray.800")}
-            maxW="sm"
+            maxW="xs"
             h="fit-content"
         >
             <Image
@@ -95,10 +85,11 @@ const ThumbnailStory: React.FC<{
                         <Flex alignItems="center">
                             <Image
                                 h={10}
+                                w={10}
                                 fit="cover"
                                 rounded="full"
                                 src={
-                                    authorAvatar ||
+                                    author.avatar ||
                                     "https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=48&q=60"
                                 }
                                 alt="Avatar"
@@ -111,11 +102,11 @@ const ThumbnailStory: React.FC<{
                                     "gray.200",
                                 )}
                             >
-                                {authorName}
+                                {author.name}
                             </Link>
                         </Flex>
                         <chakra.span
-                            mx={1}
+                            mx={0}
                             fontSize="sm"
                             color={useColorModeValue("gray.600", "gray.300")}
                         >
