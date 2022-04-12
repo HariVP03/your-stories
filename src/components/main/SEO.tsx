@@ -20,7 +20,7 @@ const defaults = {
 };
 const SEO: FC<Props> = ({
     title = defaults.title,
-    description = defaults.title,
+    description = defaults.description,
     image = defaults.image,
     url = defaults.url,
     video = "",

@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                 />
                 <meta
                     property="og:image"
-                    content="https://your-stories-hari.netlify.app/images/your-stories.svg"
+                    content="https://your-stories-hari.netlify.app/images/yourstories.png"
                 />
 
                 {/* <!-- Twitter --> */}
@@ -61,7 +61,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                 />
                 <meta
                     property="twitter:image"
-                    content="https://your-stories-hari.netlify.app/images/your-stories.svg"
+                    content="https://your-stories-hari.netlify.app/images/yourstories.png"
                 />
             </Head>
             <ChakraProvider theme={theme}>
