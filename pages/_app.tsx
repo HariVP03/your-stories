@@ -28,7 +28,10 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 
                 {/* <!-- Open Graph / Facebook --> */}
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://metatags.io/" />
+                <meta
+                    property="og:url"
+                    content="https://your-stories-hari.netlify.app/"
+                />
                 <meta
                     property="og:title"
                     content="Your Stories - Write and share your stories with the world"
@@ -37,14 +40,14 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                     property="og:description"
                     content="Write and share your stories and thoughts with the world with ease and read what other people have to share."
                 />
-                <meta
-                    property="og:image"
-                    content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"
-                />
+                <meta property="og:image" content="/your-stories.png" />
 
                 {/* <!-- Twitter --> */}
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content="https://metatags.io/" />
+                <meta
+                    property="twitter:url"
+                    content="https://your-stories-hari.netlify.app/"
+                />
                 <meta
                     property="twitter:title"
                     content="Your Stories - Write and share your stories with the world"
@@ -53,10 +56,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                     property="twitter:description"
                     content="Write and share your stories and thoughts with the world with ease and read what other people have to share."
                 />
-                <meta
-                    property="twitter:image"
-                    content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"
-                />
+                <meta property="twitter:image" content="/your-stories.png" />
             </Head>
             <ChakraProvider theme={theme}>
                 <ApolloProvider client={apolloClient}>
