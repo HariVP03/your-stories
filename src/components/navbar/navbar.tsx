@@ -106,7 +106,9 @@ const Navbar: React.FC = () => {
                         ) : (
                             <>
                                 <MenuItem>Profile</MenuItem>
-                                <MenuItem>Write a Story</MenuItem>
+                                <MenuItem onClick={() => router.push("/write")}>
+                                    Write a Story
+                                </MenuItem>
                                 <MenuItem
                                     onClick={() => {
                                         auth.signOut();
