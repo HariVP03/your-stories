@@ -15,7 +15,7 @@ const defaults = {
     title: "Your Stories",
     description:
         "Write and share your stories and thoughts with the world with ease and read what other people have to share.",
-    image: "/your-stories.png",
+    image: "images/yourstories.png",
     url: "https://your-stories-hari.netlify.app/",
 };
 const SEO: FC<Props> = ({
