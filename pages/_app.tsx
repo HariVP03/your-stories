@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                     property="og:description"
                     content="Write and share your stories and thoughts with the world with ease and read what other people have to share."
                 />
-                <meta property="og:image" content="/your-stories.png" />
+                <meta property="og:image" content="/images/yourstories.png" />
 
                 {/* <!-- Twitter --> */}
                 <meta property="twitter:card" content="summary_large_image" />
@@ -56,7 +56,10 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                     property="twitter:description"
                     content="Write and share your stories and thoughts with the world with ease and read what other people have to share."
                 />
-                <meta property="twitter:image" content="/your-stories.png" />
+                <meta
+                    property="twitter:image"
+                    content="/images/yourstories.png"
+                />
             </Head>
             <ChakraProvider theme={theme}>
                 <ApolloProvider client={apolloClient}>
