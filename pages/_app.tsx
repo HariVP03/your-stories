@@ -40,7 +40,10 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                     property="og:description"
                     content="Write and share your stories and thoughts with the world with ease and read what other people have to share."
                 />
-                <meta property="og:image" content="/images/yourstories.svg" />
+                <meta
+                    property="og:image"
+                    content="https://your-stories-hari.netlify.app/images/yourstories.svg"
+                />
 
                 {/* <!-- Twitter --> */}
                 <meta property="twitter:card" content="summary_large_image" />
@@ -58,7 +61,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                 />
                 <meta
                     property="twitter:image"
-                    content="/images/yourstories.svg"
+                    content="https://your-stories-hari.netlify.app/images/yourstories.svg"
                 />
             </Head>
             <ChakraProvider theme={theme}>
