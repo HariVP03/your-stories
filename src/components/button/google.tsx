@@ -43,9 +43,7 @@ export default function GoogleButton() {
             border="1px solid"
             borderColor="gray.300"
             onClick={() => {
-                signInWithRedirect(auth, googleProvider).then((e) => {
-                    console.log(e);
-                });
+                signInWithRedirect(auth, googleProvider);
             }}
             rounded="none"
             justifyContent="center"

@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { RecoilRoot } from "recoil";
 import Head from "next/head";
+import NextNProgress from "nextjs-progressbar";
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     const apolloClient = initializeApollo();
@@ -66,6 +67,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                     <QueryClientProvider client={queryClient}>
                         <Hydrate state={pageProps.dehydratedState}>
                             <RecoilRoot>
+                                <NextNProgress color="lime" />
                                 <Component {...pageProps} />
                             </RecoilRoot>
                         </Hydrate>
