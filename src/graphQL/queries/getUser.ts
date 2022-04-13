@@ -23,3 +23,12 @@ export const GET_RANDOM_USERS = gql`
         }
     }
 `;
+
+export const GET_USER_BY_EMAIL = gql`
+    query Query($email: String) {
+        getUserByEmail(email: $email) {
+            id
+            email
+        }
+    }
+`;

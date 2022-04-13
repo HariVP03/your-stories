@@ -1,3 +1,4 @@
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import {
     chakra,
     Flex,
@@ -11,23 +12,113 @@ import {
     Button,
 } from "@chakra-ui/react";
 import { Navbar, StoryBody } from "@components";
+import { GET_USER_BY_EMAIL } from "@queries";
+import { onAuthStateChanged } from "firebase/auth";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import moment from "moment";
 import { NextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { auth } from "src/firebase";
+import { auth, storage } from "src/firebase";
+import { ADD_STORY } from "src/graphQL/mutations";
 
 const Write: NextPage = () => {
-    const toast = useToast();
-    const user = auth.currentUser;
+    const [editTitle, setEditTitle] = useState("Title of the Story");
+    const [editTopic, setEditTopic] = useState("Your Topic");
+    const [editBody, setEditBody] = useState("Your story goes here.. :)");
+    const [loading, setLoading] = useState<boolean>(false);
+    const date = moment().format("MMM, DD, YYYY");
+    const toast = useToast({
+        containerStyle: {
+            borderRadius: "0px",
+            background: "#bee3f8",
+            border: "1px solid black",
+        },
+    });
+    const [user, setUser] = useState(auth.currentUser);
+    onAuthStateChanged(auth, (res) => {
+        setUser(res);
+    });
+
     const [thumbnail, setThumbnail] = useState<File | null>();
     useEffect(() => {
         toast({
             title: "Click on the text to edit it",
             isClosable: true,
-            variant: "solid",
+            variant: "subtle",
             status: "info",
         });
     }, []);
+
+    const [getUserByEmail] = useLazyQuery(GET_USER_BY_EMAIL);
+    const [addStory] = useMutation(ADD_STORY);
+
+    const router = useRouter();
+    const pushAndToastSuccess = () => {
+        router.push("/");
+        toast({
+            status: "success",
+            title: "Your story was successfully added!",
+            containerStyle: {
+                background: "#38a169",
+                border: "1px solid black",
+            },
+            isClosable: true,
+        });
+    };
+    const pushAndToastError = () => {
+        router.push("/");
+        toast({
+            status: "error",
+            title: "There was a problem adding your story",
+            containerStyle: {
+                background: "#e53e3e",
+                border: "1px solid black",
+            },
+            isClosable: true,
+        });
+    };
+
+    const onSubmit = () => {
+        setLoading(true);
+        if (!thumbnail) return;
+        const thumbnailRef = ref(
+            storage,
+            `/images/${user?.uid}/${Math.floor(
+                Math.random() * 1000,
+            )}/thumbnail`,
+        );
+        uploadBytes(thumbnailRef, thumbnail)
+            .then((snap) => getDownloadURL(snap.ref))
+            .then((url) =>
+                getUserByEmail({ variables: { email: user?.email } }).then(
+                    (res) => {
+                        const id = res.data.getUserByEmail.id;
+                        const data = {
+                            title: editTitle,
+                            date,
+                            body: editBody,
+                            authorId: id,
+                            thumbnail: url,
+                            topic: editTopic,
+                        };
+                        addStory({
+                            variables: { data },
+                            onCompleted: (e) => {
+                                setLoading(false);
+                                pushAndToastSuccess();
+                            },
+                            onError: (e) => {
+                                setLoading(false);
+                                pushAndToastError();
+                            },
+                        });
+                    },
+                ),
+            );
+    };
+
     return (
         <>
             <Head>
@@ -38,7 +129,14 @@ const Write: NextPage = () => {
                 <Flex w="full" minH="100vh" pt={3} direction="column">
                     <StoryBody
                         authorAvatar={user?.photoURL || ""}
-                        authorName={user?.displayName || ""}
+                        authorName={user?.displayName || "Your Name"}
+                        date={date}
+                        editBody={editBody}
+                        editTitle={editTitle}
+                        editTopic={editTopic}
+                        setEditBody={setEditBody}
+                        setEditTitle={setEditTitle}
+                        setEditTopic={setEditTopic}
                         editMode
                     />
                     <Flex
@@ -150,10 +248,20 @@ const Write: NextPage = () => {
                         </Stack>
                     </Flex>
                     <Flex gap={12} w="full" justify="center" px={12} mb={12}>
-                        <Button rounded="none" variant="ghost">
+                        <Button
+                            onClick={() => console.log(user)}
+                            rounded="none"
+                            variant="ghost"
+                        >
                             Clear
                         </Button>
-                        <Button rounded="none" variant="solid">
+                        <Button
+                            onClick={onSubmit}
+                            disabled={!user}
+                            rounded="none"
+                            variant="solid"
+                            isLoading={loading}
+                        >
                             Submit
                         </Button>
                     </Flex>

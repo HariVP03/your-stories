@@ -4,14 +4,11 @@ import {
     Checkbox,
     Flex,
     Input,
-    Radio,
     Text,
     Textarea,
 } from "@chakra-ui/react";
 import Markdown from "markdown-to-jsx";
-import moment from "moment";
-import { useState } from "react";
-import { auth } from "src/firebase";
+import { Dispatch, SetStateAction, useState } from "react";
 import styles from "./markdown.module.css";
 
 const StoryBody: React.FC<{
@@ -21,12 +18,33 @@ const StoryBody: React.FC<{
     body?: string;
     authorName: string;
     authorAvatar: string;
-}> = ({ editMode = false, title, topic, body, authorName, authorAvatar }) => {
-    const [editTitle, setEditTitle] = useState("Title of the Story");
-    const [editTopic, setEditTopic] = useState("Your Topic");
-    const [editBody, setEditBody] = useState("Your story goes here.. :)");
+    editTitle?: string;
+    editTopic?: string;
+    editBody?: string;
+    date?: string;
+    setEditTitle?: Dispatch<SetStateAction<string>>;
+    setEditTopic?: Dispatch<SetStateAction<string>>;
+    setEditBody?: Dispatch<SetStateAction<string>>;
+}> = ({
+    editMode = false,
+    title,
+    topic,
+    body,
+    authorName,
+    authorAvatar,
+    date,
+    editBody,
+    editTitle,
+    editTopic,
+    setEditBody,
+    setEditTitle,
+    setEditTopic,
+}) => {
+    // const [editTitle, setEditTitle] = useState("Title of the Story");
+    // const [editTopic, setEditTopic] = useState("Your Topic");
+    // const [editBody, setEditBody] = useState("Your story goes here.. :)");
     const [preview, setPreview] = useState<boolean>(false);
-    const date = moment().format("MMM, DD, YYYY");
+    // const date = moment().format("MMM, DD, YYYY");
 
     return (
         <Flex w="full" px={12} pt={5} direction="column">
@@ -38,7 +56,7 @@ const StoryBody: React.FC<{
                         _focus={{}}
                         // fontWeight="500"
                         value={editTopic}
-                        onChange={(e) => setEditTopic(e.target.value)}
+                        onChange={(e) => setEditTopic?.(e.target.value)}
                         _placeholder={{ color: "black" }}
                         placeholder={topic}
                         // fontSize="4xl"
@@ -51,7 +69,7 @@ const StoryBody: React.FC<{
                         _focus={{}}
                         fontWeight="500"
                         value={editTitle}
-                        onChange={(e) => setEditTitle(e.target.value)}
+                        onChange={(e) => setEditTitle?.(e.target.value)}
                         _placeholder={{ color: "black" }}
                         placeholder={title}
                         fontSize="4xl"
@@ -96,7 +114,7 @@ const StoryBody: React.FC<{
                             _active={{}}
                             _focus={{}}
                             value={editBody}
-                            onChange={(e) => setEditBody(e.target.value)}
+                            onChange={(e) => setEditBody?.(e.target.value)}
                             _placeholder={{ color: "black" }}
                             placeholder={body}
                             resize="vertical"
