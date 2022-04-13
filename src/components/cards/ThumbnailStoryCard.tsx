@@ -80,8 +80,11 @@ const ThumbnailStory: React.FC<{
                         color={useColorModeValue("gray.600", "gray.400")}
                         noOfLines={1}
                     >
-                        <Tooltip label={body} noOfLines={2}>
-                            {body}
+                        <Tooltip
+                            label={body.replace(/[^a-zA-Z0-9 ]/g, "")}
+                            noOfLines={2}
+                        >
+                            {body.replace(/[^a-zA-Z0-9 ]/g, "")}
                         </Tooltip>
                     </chakra.p>
                 </Box>
