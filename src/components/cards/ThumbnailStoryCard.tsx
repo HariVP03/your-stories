@@ -52,9 +52,12 @@ const ThumbnailStory: React.FC<{
                     <chakra.span
                         fontSize="xs"
                         textTransform="uppercase"
+                        noOfLines={1}
                         color={useColorModeValue("brand.600", "brand.400")}
                     >
-                        {topic}
+                        <Tooltip label={topic} noOfLines={2}>
+                            {topic}
+                        </Tooltip>
                     </chakra.span>
                     <Link
                         display="block"
@@ -66,17 +69,20 @@ const ThumbnailStory: React.FC<{
                             color: "gray.600",
                             textDecor: "underline",
                         }}
+                        noOfLines={1}
                     >
-                        {title}
+                        <Tooltip label={title}>{title}</Tooltip>
                     </Link>
 
                     <chakra.p
                         mt={2}
                         fontSize="sm"
                         color={useColorModeValue("gray.600", "gray.400")}
-                        noOfLines={2}
+                        noOfLines={1}
                     >
-                        {body}
+                        <Tooltip label={body} noOfLines={2}>
+                            {body}
+                        </Tooltip>
                     </chakra.p>
                 </Box>
 
@@ -94,24 +100,32 @@ const ThumbnailStory: React.FC<{
                                 }
                                 alt="Avatar"
                             />
-                            <Link
-                                mx={3}
-                                fontWeight="bold"
-                                color={useColorModeValue(
-                                    "gray.700",
-                                    "gray.200",
-                                )}
-                            >
-                                {author.name}
-                            </Link>
+                            <Flex mx={3} direction="column">
+                                <Link
+                                    // mx={3}
+                                    fontWeight="bold"
+                                    color={useColorModeValue(
+                                        "gray.700",
+                                        "gray.200",
+                                    )}
+                                    noOfLines={1}
+                                >
+                                    <Tooltip label={author.name}>
+                                        {author.name}
+                                    </Tooltip>
+                                </Link>
+                                <chakra.span
+                                    mx={0}
+                                    fontSize="sm"
+                                    color={useColorModeValue(
+                                        "gray.600",
+                                        "gray.300",
+                                    )}
+                                >
+                                    {date}
+                                </chakra.span>
+                            </Flex>
                         </Flex>
-                        <chakra.span
-                            mx={0}
-                            fontSize="sm"
-                            color={useColorModeValue("gray.600", "gray.300")}
-                        >
-                            {date}
-                        </chakra.span>
                     </Flex>
                 </Box>
             </Box>
