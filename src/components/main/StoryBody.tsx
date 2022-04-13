@@ -134,7 +134,16 @@ const StoryBody: React.FC<{
                         </Text>
                     )
                 ) : (
-                    body
+                    // body
+                    <Text
+                        className={styles.markdown}
+                        mb={5}
+                        py={0}
+                        px={0}
+                        as={Markdown}
+                    >
+                        {body || ""}
+                    </Text>
                 )}
             </Flex>
         </Flex>
