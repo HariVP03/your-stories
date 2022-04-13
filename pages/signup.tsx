@@ -37,7 +37,11 @@ export default function SignupCard() {
             >
                 <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
                     <Stack align={"center"}>
-                        <Heading fontSize={"4xl"} textAlign={"center"}>
+                        <Heading
+                            fontFamily="Poppins"
+                            fontSize={"4xl"}
+                            textAlign={"center"}
+                        >
                             Sign up
                         </Heading>
                         <Text fontSize={"lg"} color={"gray.600"}>
@@ -45,10 +49,13 @@ export default function SignupCard() {
                         </Text>
                     </Stack>
                     <Box
-                        rounded={"lg"}
+                        rounded={"none"}
                         bg={useColorModeValue("white", "gray.700")}
-                        boxShadow={"lg"}
+                        // boxShadow={"lg"}
                         p={8}
+                        border="1px solid black"
+                        // borderColor="gray.400"
+                        boxShadow="5px 5px 0px 0px lime, 5px 5px 0px 1px black"
                     >
                         <Stack spacing={4}>
                             <HStack>
