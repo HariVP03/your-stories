@@ -28,7 +28,7 @@ const Write: NextPage = () => {
     const [editTopic, setEditTopic] = useState("Your Topic");
     const [editBody, setEditBody] = useState("Your story goes here.. :)");
     const [loading, setLoading] = useState<boolean>(false);
-    const date = moment().format("MMM, DD, YYYY");
+    const date = moment().format("MMM DD, YYYY");
     const toast = useToast({
         containerStyle: {
             borderRadius: "0px",
