@@ -28,10 +28,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 
                 {/* <!-- Open Graph / Facebook --> */}
                 <meta property="og:type" content="website" />
-                <meta
-                    property="og:url"
-                    content="https://your-stories-hari.netlify.app/"
-                />
+                <meta property="og:url" content="https://your-stories.tk/" />
                 <meta
                     property="og:title"
                     content="Your Stories - Write and share your stories with the world"
@@ -42,14 +39,14 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                 />
                 <meta
                     property="og:image"
-                    content="https://your-stories-hari.netlify.app/images/yourstories.png"
+                    content="https://your-stories.tk/images/yourstories.png"
                 />
 
                 {/* <!-- Twitter --> */}
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta
                     property="twitter:url"
-                    content="https://your-stories-hari.netlify.app/"
+                    content="https://your-stories.tk/"
                 />
                 <meta
                     property="twitter:title"
@@ -61,7 +58,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                 />
                 <meta
                     property="twitter:image"
-                    content="https://your-stories-hari.netlify.app/images/yourstories.png"
+                    content="https://your-stories.tk/images/yourstories.png"
                 />
             </Head>
             <ChakraProvider theme={theme}>
